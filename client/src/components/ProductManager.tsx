@@ -1,13 +1,15 @@
 // src/components/ProductManager.tsx
 import { useState, useEffect } from "react";
 
-const API_URL = import.meta.env.VITE_API_URL 
-    ? import.meta.env.VITE_API_URL 
-    : "http://localhost:3000";
+const API_URL = import.meta.env.VITE_API_URL || "https://api-fullstack-ple2.onrender.com/api";
 
 console.log("API_BASE:", API_URL);
 
+
 console.log("API_BASE:", API_URL+'/products');
+
+console.log("Todas las variables de entorno:", import.meta.env);
+console.log("API_URL:", import.meta.env.VITE_API_URL);
 
 interface Product {
   id?: number;
