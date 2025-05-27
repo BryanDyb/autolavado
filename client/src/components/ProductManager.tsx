@@ -1,7 +1,9 @@
 // src/components/ProductManager.tsx
 import { useState, useEffect } from "react";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api/products";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
+console.log("API_BASE:", API_URL+'/api/products');
 
 interface Product {
   id?: number;
@@ -13,13 +15,16 @@ interface Product {
 export default function ProductManager() {
   const [products, setProducts] = useState<Product[]>([]);
   const [form, setForm] = useState<Product>({ name: "", price: 0, disponibily: true });
+  console.log("API:", API_URL);
 
-  useEffect(() => {
-    fetch(`${API_URL}/api/products`)
-      .then(res => res.json())
-      .then(data => setProducts(data.data))
-      .catch(err => console.error("Error al cargar productos", err));
-  }, []);
+
+useEffect(() => {
+  fetch(`${API_URL}/products`)
+    .then(res => res.json())
+    .then(data => setProducts(data.data))
+    .catch(err => console.error("Error al cargar productos", err));
+}, []);
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -29,21 +34,23 @@ export default function ProductManager() {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const res = await fetch(API_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
-    });
-    if (res.ok) {
-      const newProduct = await res.json();
-      setProducts(prev => [...prev, newProduct]);
-      setForm({ name: "", price: 0, disponibily: true });
-    } else {
-      console.error("Error al crear producto");
-    }
-  };
+// POST nuevo producto
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  const res = await fetch(`${API_URL}/api/products`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(form),
+  });
+  if (res.ok) {
+    const newProduct = await res.json();
+    setProducts(prev => [...prev, newProduct]);
+    setForm({ name: "", price: 0, disponibily: true });
+  } else {
+    console.error("Error al crear producto");
+  }
+};
+
 
   return (
     <div className="max-w-2xl mx-auto mt-10 p-4 border rounded shadow">
