@@ -3,12 +3,14 @@ import express from "express";
 import cors from "cors"; // 👈 importar CORS
 import router from "./router";
 import db from "./config/db";
-
+const FRONDEND_URL = process.env.frontend_url || "http://localhost:3000";
 const Server = express();
+
+
 
 // 💥 Habilitar CORS para todas las rutas
 Server.use(cors({
-  origin: ['https://api-fullstack-1.onrender.com/'], // 🔁 cambia esto por el dominio real de tu frontend
+  origin: ['https://api-fullstack-1.onrender.com'], // 🔁 cambia esto por el dominio real de tu frontend
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
 }));

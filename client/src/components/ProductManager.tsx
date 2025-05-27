@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
-console.log("API_BASE:", API_URL+'/api/products');
+console.log("API_BASE:", API_URL+'/products');
 
 interface Product {
   id?: number;
@@ -37,7 +37,7 @@ useEffect(() => {
 // POST nuevo producto
 const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
-  const res = await fetch(`${API_URL}/api/products`, {
+  const res = await fetch(`${API_URL}/products`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(form),
