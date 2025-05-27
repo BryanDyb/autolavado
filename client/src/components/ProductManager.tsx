@@ -1,7 +1,11 @@
 // src/components/ProductManager.tsx
 import { useState, useEffect } from "react";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+const API_URL = import.meta.env.VITE_API_URL 
+    ? import.meta.env.VITE_API_URL 
+    : "http://localhost:3000";
+
+console.log("API_BASE:", API_URL);
 
 console.log("API_BASE:", API_URL+'/products');
 
@@ -24,6 +28,7 @@ useEffect(() => {
     .then(data => setProducts(data.data))
     .catch(err => console.error("Error al cargar productos", err));
 }, []);
+
 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {

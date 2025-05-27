@@ -3,7 +3,6 @@ import express from "express";
 import cors from "cors"; // 👈 importar CORS
 import router from "./router";
 import db from "./config/db";
-const FRONDEND_URL = process.env.frontend_url || "http://localhost:3000";
 const Server = express();
 
 
