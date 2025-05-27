@@ -15,7 +15,7 @@ export default function ProductManager() {
   const [form, setForm] = useState<Product>({ name: "", price: 0, disponibily: true });
 
   useEffect(() => {
-    fetch(API_URL)
+    fetch(`${API_URL}/api/products`)
       .then(res => res.json())
       .then(data => setProducts(data.data))
       .catch(err => console.error("Error al cargar productos", err));
