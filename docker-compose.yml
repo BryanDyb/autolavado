@@ -20,7 +20,7 @@ services:
     env_file: .env
     environment:
       NODE_ENV: development
-      DB_URL: ${BD_URL}
+      DB_URL: ${DB_URL}
     restart: unless-stopped
     networks:
       - app-network
